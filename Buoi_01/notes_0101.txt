@@ -1,0 +1,3 @@
+Giới thiệu về DevOps
+Stetup môi trường
+Install Docker, Ansible, Kube, Terraform

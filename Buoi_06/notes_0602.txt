@@ -1,0 +1,16 @@
+Buổi 05 : docker căn bản
+
+Buoi 06 : Docker swarm
+
+- Kubernestes
+- Nomad
+- Docker swarm
+Bai tap
+https://www.katacoda.com/courses/docker-orchestration/getting-started-with-swarm-mode
+
+Docker swarm init
+https://docker-ghichep.readthedocs.io/en/latest/docker-swarm/#docker-swarm
+
+
+Bài tập: dùng vargant install docker swarm
+- NFS đường mạng nhược điểm có server DB, doblicate, performence

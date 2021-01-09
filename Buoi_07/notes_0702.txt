@@ -1,0 +1,11 @@
+CMD : Image docker chay lên xong (có container) mới chạy lệnh này
+EVN : biến môi trường
+ADD : giống như lệnh COPY, có thể pull từ internet
+VOLUME : trỏ data máy thật vào máy ảo
+USE : default là root
+WORKDIR : thư mục làm việc
+ARG : Cần truyền tham số ngay lúc build
+no-cache-dir : không cache để image nhỏ dung lượng
+
+AS BUILD : là lệnh chỉ build, xong lấy kết quả build thôi cho nhỏ dung lượng
+

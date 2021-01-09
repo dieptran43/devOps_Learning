@@ -1,0 +1,33 @@
+Buổi 05 : docker căn bản
+
+docker status : kiểm tra tài nguyên
+docker run nginx : tự get pull nếu chưa có
+docker run -d -p 8080:80 nginx : maping ở ngoài 8080 vào 80 của máy nginx
+docker stop DockerID
+docker rm ImagesDocker
+
+Docker compose là viết ra file bao gồm các lệnh cmd
+
+docker logs -f ImagesDocker : xem realtime logs
+docker ps -aq | xargs docker rm : stop (xargs) và remove nhiều ImagesDocker
+docker run -d nginx : chaỵ ngầm khi thoát cmd
+docker exec -it DockerID bash : vào bên trong máy ảo
+
+Detect xem folder nào của Docker chiếm dung lượng
+/var/lib/docker
+
+Xong 2 bài này:
+- tạo 2 máy ảo Vagrant khác nhau
+- Tạo Swarm cho 2 máy ảo đó
+- Install Portainer lên Manager
+
+Các links tham khảo:
+
+https://docs.docker.com/engine/reference/commandline/system_prune/
+https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/
+https://www.nomadproject.io/
+https://www.katacoda.com/courses/docker/swarm
+
+https://tutorialedge.net/golang/go-docker-tutorial/
+
+

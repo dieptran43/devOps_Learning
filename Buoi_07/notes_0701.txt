@@ -1,0 +1,38 @@
+Buoi 07:
+- Dong goi container
+https://github.com/docker/labs/tree/master/beginner/
+https://docs.docker.com/engine/reference/builder/
+
+docker build .
+docker build -f “ten docker file n” .
+
+Đặt tên cho image docker
+- docker build -t “ten muon dat” .
+- docker build -t “ten muon dat”:1.0.1 co nghia la version
+
+Đổi tên docker ra docker mới
+    docker tag nordic diepdocker/nordic
+
+- Auto reset nếu có cúp điện, crack app
+- https://docs.docker.com/config/containers/start-containers-automatically/
+
+Docker registry
+ docker run -d -p 5000:5000 --restart always --name registry registry:2
+
+    docker push localhost:5000/nordic:lastest
+
+//Migrate database nay qua database khan
+https://pgloader.readthedocs.io/en/latest/ref/pgsql.html
+
+Bai tap: deploy voi Postur, voi Google 
+https://cloud.google.com/container-registry
+
+
+Các links tham khảo
+https://docs.docker.com/engine/reference/commandline/tag/
+https://www.docker.com/blog/containerize-your-go-developer-environment-part-1/
+https://tutorialedge.net/golang/go-docker-tutorial/
+https://docs.docker.com/config/containers/start-containers-automatically/
+https://cloud.google.com/container-registry
+https://pgloader.readthedocs.io/en/latest/ref/pgsql.html
+https://github.com/docker/labs

@@ -1,0 +1,5 @@
+xong file main.tf
+
+terraform init
+
+
