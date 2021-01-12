@@ -71,6 +71,7 @@ kubectl delete -n default service hostnames
 - LoadBalancer : 
 
 Cac namspace phan dinh vung hoat dong cua cac service
+Mac dinh cua Kube, namspace la default
 
 
 https://minikube.sigs.k8s.io/docs/handbook/controls/
