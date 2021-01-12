@@ -1,0 +1,81 @@
+Kubernetes khái niệm
+
+https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/
+
+https://dev.to/mostlyjason/intro-to-deployment-strategies-blue-green-canary-and-more-3a3
+Khai niệm roll-deployment, Blue-green, canary deployment
+- trong kube giao tiếp qua service name
+
+- Core DNS sẽ phân giải domain đó
+- Docker build kit hỗ trợ nhớ cache cho các lần build sau cùng dạng sẽ tốt hơn
+- CLuster nói một cụm node, ít nhất là 1 workder node
+- Kube maseter node và workder node
+- kubectrl hỗ trợ thao tác các lệnh với kube
+- kuber-apiservice: user giao tiếp với kuber qua api service của Kubernetes
+- Đơn vị là Pod, pod có thể chứa 1 hoặc nhiều container
+- etcd chứa tất cả config của Kube, nó chính là database của Kube
+- kube-scheduler Làm sao app nào chạy pod nào tự nó control việc đó
+- kubelet là giúp các con node chạy container trong Pod, giao tiếp Master manager
+- 
+kubectl get pods : lấy tất cả các pod đang chạy
+kubectl get sercure
+
+minikube: chạy kube trên local for development
+https://kubernetes.io/vi/docs/tasks/tools/install-minikube/
+
+Các links liên quan:
+https://kubernetes.io/docs/tasks/tools/install-kubectl/
+https://kubernetes.io/vi/docs/reference/kubectl/cheatsheet/
+https://topdev.vn/blog/kubernetes-la-gi/
+https://minikube.sigs.k8s.io/docs/
+https://kubernetes.io/docs/concepts/overview/components/
+https://kubernetes.io/docs/tutorials/hello-minikube/
+https://medium.com/@dugiahuy/kubernetes-helm-101-88074e2b76d9
+
+
+Buoi 09
+brew install minikube
+
+https://minikube.sigs.k8s.io/docs/start/
+minikube start
+minikube dashboard  
+Run mot Pod hello-minikube
+kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4
+
+kubectl get pods : xem danh sach pods
+kubectl create deployment nginx --image=nginx
+kubectl logs -f <POD NAME> : get logs xem no chay
+
+Co che access tu ngoai vao trong kube
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+
+minikube service hello-minikube : Danh so Nha, cac service noi chuyen internal voi nhau
+1 deployment co the co nhieu pods
+kubectl get deployment
+kubectl scale deployment hello-minikube --replicas 3 : tao 3 pods
+kubectl get pods
+
+minikube service hello-world
+
+Test kube hoat dong dung tools: kuard
+kubectl create deployment hostnames --image=k8s.gcr.io/serve_hostname
+kubectl expose deployment hostnames --port=80 --target-port=9376 —-type=NodePort
+kubectl scale deployment hostnames --replicas 3
+
+Delete service
+kubectl delete -n default service hostnames
+
+3 loai service cua Kube
+- CLusterIP (default) : chỉ nội bô giao tiếp với nhau
+- NodePort : de expose ben ngoai access vao
+- LoadBalancer : 
+
+Cac namspace phan dinh vung hoat dong cua cac service
+
+
+https://minikube.sigs.k8s.io/docs/handbook/controls/
+https://minikube.sigs.k8s.io/docs/start/
+
+
+
+
