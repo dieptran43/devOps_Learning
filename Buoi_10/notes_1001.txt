@@ -74,9 +74,96 @@ Cac namspace phan dinh vung hoat dong cua cac service
 Mac dinh cua Kube, namspace la default
 
 
+
+
 https://minikube.sigs.k8s.io/docs/handbook/controls/
 https://minikube.sigs.k8s.io/docs/start/
 https://kubernetes.io/vi/docs/reference/kubectl/cheatsheet/
+
+
+Buoi 10
+kubectl config view
+kubectl config get-contexts  : danh sach cac context
+
+https://kubernetes.io/vi/docs/reference/kubectl/cheatsheet/
+
+kubectl config use-context my-cluster-name  # su dung context
+
+#chuyen namespaces 
+kubectl create namespace nordic-coder
+kubectl config set-context --current --namespace=TenNamespace
+
+kubectl config set-context --current --namespace=ggckad-s2
+#metadata: app: //de service hieu dc deployment nao
+
+#De delete Pod
+kubectl delete -f pod.yaml
+kubectl delete pods init-demo
+
+kubectl apply -f nginx-pod.yaml
+
+#Xoa deployment
+kubectl delete deployment tenDeployment
+kubectl apply -f nginx-dep.yaml
+#hoac
+kubectl delete deployment nginx-deployment
+
+#Xoa service
+kubectl delete service TenService
+kubectl apply -f nginx-svc.yaml
+kubectl delete deployment nginx-deployment
+
+#Volume
+# storageClass : kube dinh nghia noi luu
+#Persistent Volume : O cung user khai bao
+#Persistent Volume Claim : Kube dung bao nhieu
+
+
+kind: Pod
+apiVersion: v1
+metadata:
+   name: mypod
+   labels:
+      name: frontendhttp
+spec:
+   containers:
+   - name: myfrontend
+      image: nginx
+      ports:
+      - containerPort: 80
+         name: "http-server"
+      volumeMounts: ----------------------------> 1
+      - mountPath: "/usr/share/tomcat/html"  # PVC tro ra ngoai luu data o day
+         name: mypd
+   volumes: -----------------------> 2
+      - name: mypd
+         persistentVolumeClaim: ------------------------->3
+         claimName: myclaim-1
+
+#Viec get data cua folder html neu co truong hop loi xay ra thi rat kho
+#Giai phap luu ngoai
+
+#DB co the scale
+ CassaraDB
+ CorokDB
+ Postgres - operator : Ho tro tu dong
+
+ #Solution
+ Rook
+ OpenEBS
+ 
+
+
+
+
+
+https://kind.sigs.k8s.io
+https://github.com/arslanbilal/git-cheat-sheet
+
+
+
+
+
 
 
 
