@@ -1,0 +1,202 @@
+Kubernetes khái niệm
+
+https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/
+
+https://dev.to/mostlyjason/intro-to-deployment-strategies-blue-green-canary-and-more-3a3
+Khai niệm roll-deployment, Blue-green, canary deployment
+- trong kube giao tiếp qua service name
+
+- Core DNS sẽ phân giải domain đó
+- Docker build kit hỗ trợ nhớ cache cho các lần build sau cùng dạng sẽ tốt hơn
+- CLuster nói một cụm node, ít nhất là 1 workder node
+- Kube maseter node và workder node
+- kubectrl hỗ trợ thao tác các lệnh với kube
+- kuber-apiservice: user giao tiếp với kuber qua api service của Kubernetes
+- Đơn vị là Pod, pod có thể chứa 1 hoặc nhiều container
+- etcd chứa tất cả config của Kube, nó chính là database của Kube
+- kube-scheduler Làm sao app nào chạy pod nào tự nó control việc đó
+- kubelet là giúp các con node chạy container trong Pod, giao tiếp Master manager
+- 
+kubectl get pods : lấy tất cả các pod đang chạy
+kubectl get sercure
+
+minikube: chạy kube trên local for development
+https://kubernetes.io/vi/docs/tasks/tools/install-minikube/
+
+Các links liên quan:
+https://kubernetes.io/docs/tasks/tools/install-kubectl/
+https://kubernetes.io/vi/docs/reference/kubectl/cheatsheet/
+https://topdev.vn/blog/kubernetes-la-gi/
+https://minikube.sigs.k8s.io/docs/
+https://kubernetes.io/docs/concepts/overview/components/
+https://kubernetes.io/docs/tutorials/hello-minikube/
+https://medium.com/@dugiahuy/kubernetes-helm-101-88074e2b76d9
+
+
+Buoi 09
+brew install minikube
+
+https://minikube.sigs.k8s.io/docs/start/
+minikube start
+minikube dashboard  
+Run mot Pod hello-minikube
+kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.4
+
+kubectl get pods : xem danh sach pods
+kubectl create deployment nginx --image=nginx
+kubectl logs -f <POD NAME> : get logs xem no chay
+
+Co che access tu ngoai vao trong kube
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+
+minikube service hello-minikube : Danh so Nha, cac service noi chuyen internal voi nhau
+1 deployment co the co nhieu pods
+kubectl get deployment
+kubectl scale deployment hello-minikube --replicas 3 : tao 3 pods
+kubectl get pods
+
+minikube service hello-world
+
+Test kube hoat dong dung tools: kuard
+kubectl create deployment hostnames --image=k8s.gcr.io/serve_hostname
+kubectl expose deployment hostnames --port=80 --target-port=9376 —-type=NodePort
+kubectl scale deployment hostnames --replicas 3
+
+Delete service
+kubectl delete -n default service hostnames
+
+3 loai service cua Kube
+- CLusterIP (default) : chỉ nội bô giao tiếp với nhau
+- NodePort : de expose ben ngoai access vao
+- LoadBalancer : 
+
+Cac namspace phan dinh vung hoat dong cua cac service
+Mac dinh cua Kube, namspace la default
+
+
+
+
+https://minikube.sigs.k8s.io/docs/handbook/controls/
+https://minikube.sigs.k8s.io/docs/start/
+https://kubernetes.io/vi/docs/reference/kubectl/cheatsheet/
+
+
+Buoi 10
+kubectl config view
+kubectl config get-contexts  : danh sach cac context
+
+https://kubernetes.io/vi/docs/reference/kubectl/cheatsheet/
+
+kubectl config use-context my-cluster-name  # su dung context
+
+#chuyen namespaces 
+kubectl create namespace nordic-coder
+kubectl config set-context --current --namespace=TenNamespace
+
+kubectl config set-context --current --namespace=ggckad-s2
+#metadata: app: //de service hieu dc deployment nao
+
+#De delete Pod
+kubectl delete -f pod.yaml
+kubectl delete pods init-demo
+
+kubectl apply -f nginx-pod.yaml
+
+#Xoa deployment
+kubectl delete deployment tenDeployment
+kubectl apply -f nginx-dep.yaml
+#hoac
+kubectl delete deployment nginx-deployment
+
+#Xoa service
+kubectl delete service TenService
+kubectl apply -f nginx-svc.yaml
+kubectl delete deployment nginx-deployment
+
+#Volume
+# storageClass : kube dinh nghia noi luu
+#Persistent Volume : O cung user khai bao
+#Persistent Volume Claim : Kube dung bao nhieu
+
+
+kind: Pod
+apiVersion: v1
+metadata:
+   name: mypod
+   labels:
+      name: frontendhttp
+spec:
+   containers:
+   - name: myfrontend
+      image: nginx
+      ports:
+      - containerPort: 80
+         name: "http-server"
+      volumeMounts: ----------------------------> 1
+      - mountPath: "/usr/share/tomcat/html"  # PVC tro ra ngoai luu data o day
+         name: mypd
+   volumes: -----------------------> 2
+      - name: mypd
+         persistentVolumeClaim: ------------------------->3
+         claimName: myclaim-1
+
+#Viec get data cua folder html neu co truong hop loi xay ra thi rat kho
+#Giai phap luu ngoai
+
+#DB co the scale
+ CassaraDB
+ CorokDB
+ Postgres - operator : Ho tro tu dong
+
+ #Solution
+ Rook
+ OpenEBS
+
+https://kind.sigs.k8s.io
+https://github.com/arslanbilal/git-cheat-sheet
+
+
+Buoi 11
+Node port trong: 30000 - 30470
+Buoc 0: 
+Tao cluster tren google cloud
+https://console.cloud.google.com/kubernetes/list?authuser=2&project=formal-airway-299803
+
+B1 cai google cloud sdk
+Install : curl https://sdk.cloud.google.com | bash
+Hoac : https://cloud.google.com/sdk/docs/install
+Cai: gcloud init
+Hoac: sh install.sh
+
+B2: Tao cluster tren cloud
+B3 : Chon connect
+gcloud container clusters get-credentials cluster-demo --zone us-central1-c --project formal-airway-299803
+
+
+gcloud auth login
+cat ~/.kube/config
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+Kubectl context and configuration
+
+https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl
+kubectl config current-context
+
+
+https://rtfm.co.ua/en/kubernetes-clusterip-vs-nodeport-vs-loadbalancer-services-and-ingress-an-overview-with-examples/
+
+#set resource : limits dam bao control duoc dung luong chay pods (cap phat dong)
+#initContainers : khoi chay truoc, roi moi chay Container chinh
+
+#Helm cac package duoc dong goi se duoc day len Kube
+# Cac gia tri muon customize thi dung helm
+# Uu diem co the customize ngay luc install luon
+
+https://medium.com/@dugiahuy/kubernetes-helm-101-88074e2b76d9#:~:text=Helm%20l%C3%A0%20m%E1%BB%99t%20package%20manager,l%C3%AAn%20t%E1%BB%AB%20nh%E1%BB%AFng%20Kubernetes%20resource.
+https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+
+
+
+
+
+
+
